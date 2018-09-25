@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.2.xsd">
+	
+	<!-- 1번 방법: bean 객체 만들기 -->
+	<bean id="helloController" class="spring.controller.HelloController" />
+	<!-- 2번 방법
+	 <context:component-scan base-package="spring.controller"></context:component-scan>
+	Autowired 사용시 필요함:: 	<context:annotation-config />
+	 -->
+	
+	<!-- 3.list저장 예제 -->
+ 	<bean class="spring.controller.OrderController" /> 
+ 	<!-- 4.매겨변수타입 예제 -->
+ 	<bean id="searchController" class="spring.controller.SearchController" />
+	<bean id="cookieController" class="spring.controller.CookieController" />
+	<bean class="spring.controller.HeaderController" />
+	
+	<!-- 5.model생성 예제 -->
+	<bean class="spring.controller.GameSearchController" p:searchService-ref="searchService" />
+	<bean id="searchService" class="spring.service.SearchService" />
+	
+	
+	<!-- /WEB-INF/views/hello.jsp -->
+	<bean id="viewResolver" 
+	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id="newArticleController" class="spring.controller.NewArticleController"
+	p:articleService-ref="articleService" />
+	<bean id="articleService" class="spring.service.ArticleService" />
+	
+	
+</beans>
